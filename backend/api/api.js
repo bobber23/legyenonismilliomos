@@ -41,4 +41,25 @@ router.get('/testsql', async (request, response) => {
     }
 });
 
+router.post('/addQuestion', upload.none(), async (request, response) => {
+    try {
+        const { question, difficulty, answerA, answerB, answerC, answerD, correctAnswer } =
+            request.body;
+        const questionID = await database.addQuestion(question, difficulty);
+        const feedback = await database.addAnswers(
+            [answerA, answerB, answerC, answerD],
+            correctAnswer,
+            questionID
+        );
+        response.status(200).json({
+            status: feedback
+        });
+    } catch (error) {
+        console.log(error);
+        response.status(500).json({
+            message: 'Az /addQuestion végpont gatya'
+        });
+    }
+});
+
 module.exports = router;

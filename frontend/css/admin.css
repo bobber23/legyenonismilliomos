@@ -47,19 +47,23 @@ body {
 }
 
 #newQuestion {
-    width: 45%;
+    width: 100%;
     height: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 fieldset {
     height: 100%;
-    width: 100%;
+    width: 50%;
     margin: 0;
-    padding: 10px 50px 0 50px;
+    padding: 10px 50px 0px 50px;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 2.5%;
 }
 
 legend {
@@ -84,13 +88,104 @@ label {
     height: 10%;
 }
 
-#questionTitleLabel {
+#titleDifficultyWrapper {
     height: 20%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }
 
-#questionTitleInput {
-    height: 50%;
+#questionTitle {
+    width: 80%;
+    height: 100%;
+}
+
+#questionDifficulty {
+    width: 20%;
+    height: 100%;
+}
+
+#questionDifficulty p {
+    height: 30%;
+    margin: 0;
+}
+
+#questionDifficulty input {
+    height: 70%;
+    font-size: 40px;
+    appearance: textfield;
+}
+
+#questionDifficulty input::-webkit-inner-spin-button,
+#questionDifficulty input::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+.questionAnswers {
+    height: 10%;
+}
+
+.questionAnswers p {
+    height: 30%;
+    margin: 0;
+}
+
+.questionAnswers input {
+    height: 70%;
+    font-size: 18px;
+}
+
+#questionTitle p {
+    height: 30%;
+    margin: 0;
+}
+
+#questionTitle textarea {
+    height: 70%;
     resize: none;
     font-size: 16px;
     padding: 5px 10px 5px 10px;
+    margin: 0;
+}
+
+.correctAnswer {
+    display: flex;
+    flex-direction: column;
+    height: 10%;
+}
+
+.correctAnswer p {
+    margin: 0;
+}
+
+.correctAnswerRadioWrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.correctAnswerWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.correctAnswerWrapper p {
+    margin: 0;
+}
+
+#addQuestionBtn {
+    height: 10%;
+    width: 100%;
+    font-size: 20px;
+}
+
+.invalid {
+    border: 1px solid red;
+    color: red;
 }

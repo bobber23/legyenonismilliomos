@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hu">
     <head>
         <meta charset="UTF-8" />
@@ -16,15 +16,76 @@
                 <form id="newQuestion">
                     <fieldset>
                         <legend>Új kérdés</legend>
-                        <label id="questionTitleLabel">
-                            Kérdés:
-                            <textarea
-                                type="text"
-                                name="question"
-                                id="questionTitleInput"
-                                maxlength="255"
-                            ></textarea>
+                        <div id="titleDifficultyWrapper">
+                            <label id="questionTitle">
+                                <p>Kérdés:</p>
+                                <textarea type="text" name="question" maxlength="255"></textarea>
+                            </label>
+                            <label id="questionDifficulty">
+                                <p>Nehézség:</p>
+                                <input type="number" name="difficulty" />
+                            </label>
+                        </div>
+
+                        <label class="questionAnswers">
+                            <p>A. válasz:</p>
+                            <input type="text" name="answerA" maxlength="255" />
                         </label>
+                        <label class="questionAnswers">
+                            <p>B. válasz:</p>
+                            <input type="text" name="answerB" maxlength="255" />
+                        </label>
+                        <label class="questionAnswers">
+                            <p>C. válasz:</p>
+                            <input type="text" name="answerC" maxlength="255" />
+                        </label>
+                        <label class="questionAnswers">
+                            <p>D. válasz:</p>
+                            <input type="text" name="answerD" maxlength="255" />
+                        </label>
+
+                        <label class="correctAnswer">
+                            <p>Helyes válasz:</p>
+                            <div class="correctAnswerRadioWrapper">
+                                <div class="correctAnswerWrapper">
+                                    <p>A</p>
+                                    <input
+                                        type="radio"
+                                        name="correctAnswer"
+                                        value="0"
+                                        class="correctRadio"
+                                    />
+                                </div>
+                                <div class="correctAnswerWrapper">
+                                    <p>B</p>
+                                    <input
+                                        type="radio"
+                                        name="correctAnswer"
+                                        value="1"
+                                        class="correctRadio"
+                                    />
+                                </div>
+                                <div class="correctAnswerWrapper">
+                                    <p>C</p>
+                                    <input
+                                        type="radio"
+                                        name="correctAnswer"
+                                        value="2"
+                                        class="correctRadio"
+                                    />
+                                </div>
+                                <div class="correctAnswerWrapper">
+                                    <p>D</p>
+                                    <input
+                                        type="radio"
+                                        name="correctAnswer"
+                                        value="3"
+                                        class="correctRadio"
+                                    />
+                                </div>
+                            </div>
+                        </label>
+                        <input type="button" value="Hozzáadás" id="addQuestionBtn" />
                     </fieldset>
                 </form>
             </div>
