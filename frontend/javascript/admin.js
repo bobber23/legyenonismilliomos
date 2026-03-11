@@ -14,21 +14,26 @@ async function addQuestion() {
         alert('Nem választott ki helyes választ!');
     } else {
         const form = document.getElementById('newQuestion');
-        let formData = new FormData(form);
-        let isValid = true;
+        let formData = new FormData();
 
-        for (let entry of formData.entries()) {
-            if (entry[0] == 'difficulty' && (entry[1] > 15 || entry[1] < 1)) {
+        let isValid = true;
+        let inputs = document.querySelectorAll('.formInput');
+
+        for (let input of inputs) {
+            if (input.value == '') {
+                input.classList.add('invalid');
                 isValid = false;
-            }
-            if (entry[1] == '') {
-                isValid = false;
+            } else {
+                input.classList.remove('invalid');
+                formData.append(input.name, input.value);
             }
         }
+        formData.append('correctAnswer', radioButtons[j].value);
 
         if (isValid) {
             try {
                 const response = await Post('/api/addQuestion', formData);
+                form.reset();
             } catch (error) {
                 console.error(error);
             }
