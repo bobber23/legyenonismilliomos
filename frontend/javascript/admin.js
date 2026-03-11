@@ -21,6 +21,7 @@ async function addQuestion() {
 
         for (let input of inputs) {
             if (input.value == '') {
+                console.log('ads');
                 input.classList.add('invalid');
                 isValid = false;
             } else {
