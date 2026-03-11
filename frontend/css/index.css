@@ -1,0 +1,9 @@
+body {
+    background: #3F308F;
+    background: radial-gradient(circle,rgba(63, 48, 143, 1) 0%, rgba(33, 26, 59, 1) 100%);
+}
+
+#milliomospng{
+    height: min(30vw, 30vh);
+    width: min(30vw, 30vh);
+}
