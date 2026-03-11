@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('addQuestionBtn').addEventListener('click', addQuestion);
+    document.getElementById('difficultyInput').addEventListener('input', checkForValue);
 });
 
 async function addQuestion() {
@@ -49,5 +50,18 @@ async function Post(url, data) {
         return await response.json();
     } catch (error) {
         throw new Error(error);
+    }
+}
+
+function checkForValue() {
+    let regex = /^[0-9]/;
+    if (!regex.test(this.value)) {
+        this.value = '';
+    }
+    if (this.value < 1 && this.value != '') {
+        this.value = '1';
+    }
+    if (this.value > 15) {
+        this.value = '15';
     }
 }
