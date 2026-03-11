@@ -28,6 +28,11 @@ router.get('/', (request, response) => {
     response.sendFile(path.join(__dirname, '../frontend/html/index.html'));
 });
 
+//?Login és register:
+router.get('/login', (request, response) => {
+    response.sendFile(path.join(__dirname, '../frontend/html/login.html'));
+});
+
 //!API endpoints
 app.use('/', router);
 const endpoints = require('./api/api.js');
