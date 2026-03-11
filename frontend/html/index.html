@@ -1,25 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hu">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Főoldal</title>
+        <title>Bejelentkezés</title>
         <!--!Bootstrap-->
         <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
         <!--?Popper: dropdowns, popovers, tooltips-->
         <script src="../bootstrap/js/popper.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
         <!--!CSS-->
-        <link rel="stylesheet" href="../css/index.css" />
+        <link rel="stylesheet" href="../css/login.css" />
         <!--!JavaScript-->
-        <script src="../javascript/index.js"></script>
+        <script src="../javascript/login.js"></script>
     </head>
     <body>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7" id="left">
                     <h1 id="title">Legyen ön is milliomos!</h1>
-                    <img id="milliomospng" src="milliomos.png">
+                    <img
+                        id="milliomospng"
+                        src="../images/milliomos.png"
+                        alt="Legyen Ön Is Milliomos"
+                    />
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5" id="right">
                     <div class="form-container">
@@ -27,35 +31,75 @@
                             <h2 id="loginTitle">Bejelentkezés</h2>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Felhasználónév</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="usernameInput"
+                                    name="username"
+                                    required
+                                />
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Jelszó</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="passwordInput"
+                                    name="password"
+                                    required
+                                />
                             </div>
-                            <button type="submit" class="btn btn-primary">Bejelentkezés</button>
+                            <button type="button" class="btn btn-primary" id="loginButton">
+                                Bejelentkezés
+                            </button>
                             <a href="#" id="showRegister">Nincs még fiókod? Regisztrálj!</a>
                         </form>
                         <form id="registerForm">
                             <h2 id="registerTitle">Regisztráció</h2>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Felhasználónév</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="registerUsernameInput"
+                                    name="username"
+                                    required
+                                />
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Jelszó</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="registerPasswordInput"
+                                    name="password"
+                                    required
+                                />
                             </div>
                             <div class="mb-3">
                                 <label for="passwordAgain" class="form-label">Jelszó ismét</label>
-                                <input type="passwordAgain" class="form-control" id="password" name="password" required>
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="registerPasswordInputAgain"
+                                    name="password"
+                                    required
+                                />
                             </div>
-                            <button type="submit" class="btn btn-primary">Regisztráció</button>
+                            <button type="button" class="btn btn-primary" id="registerButton">
+                                Regisztráció
+                            </button>
                             <a href="#" id="showLogin">Van már fiókod? Jelentkezz be!</a>
                         </form>
                     </div>
                 </div>
-            </div> 
+            </div>
+        </div>
+        <div id="alert" class="alert">
+            <div class="alertBox">
+                <p id="alertMessage"></p>
+                <button onclick="closeAlert()">OK</button>
+            </div>
         </div>
     </body>
 </html>

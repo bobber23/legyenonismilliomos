@@ -1,55 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('registerLink').addEventListener('click', register);
-    document.getElementById('loginBtn').addEventListener('click', login);
+    registerForm.style.display = 'none';
+    document.getElementById('showRegister').addEventListener('click', toggleLoginOrRegister);
+    document.getElementById('showLogin').addEventListener('click', toggleLoginOrRegister);
+    document.getElementById('loginButton').addEventListener('click', loginPost);
+    document.getElementById('registerButton').addEventListener('click', registerPost);
 });
 
-const register = () => {
-    try {
-        const card = document.querySelector('.card');
-        card.id = 'registerForm';
-        card.innerHTML = `<div class="card-header text-center">
-                        <h2>Regisztráció</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="username">
-                            <label for="usernameInput" class="form-label">Felhasználónév</label>
-                            <input type="text" required class="form-control" id="usernameInput" placeholder="Adja meg a felhasználónevet"/>
-                        </div>
-                        <div class="password">
-                            <label for="passwordInput" class="form-label">Jelszó</label>
-                            <input type="password" required class="form-control" id="passwordInput" placeholder="Adja meg a jelszavát"/>
-                        </div>
-                        <div class="password">
-                            <label for="passwordInputAgain" class="form-label">Jelszó</label>
-                            <input type="password" required class="form-control" id="passwordInputAgain" placeholder="Adja meg a jelszavát újra"/>
-                        </div>
-                    </div>
-                    <div class="card-footer text-center">
-                        <button class="registerBtn btn" id="registerBtn">
-                            Regisztráció
-                        </button>
-                    </div>`;
+function toggleLoginOrRegister() {
+    const registerForm = document.getElementById('registerForm');
+    const loginForm = document.getElementById('loginForm');
 
-        document.getElementById('registerBtn').addEventListener('click', registerPost);
-    } catch (error) {
-        console.log(error);
+    if (registerForm.style.display === 'none') {
+        registerForm.style.display = 'flex';
+        loginForm.style.display = 'none';
+    } else {
+        registerForm.style.display = 'none';
+        loginForm.style.display = 'flex';
     }
-};
+}
 
 const registerPost = async () => {
     try {
-        const username = document.getElementById('usernameInput').value;
-        const password = document.getElementById('passwordInput').value;
-        const passwordAgain = document.getElementById('passwordInputAgain').value;
+        const username = document.getElementById('registerUsernameInput').value;
+        const password = document.getElementById('registerPasswordInput').value;
+        const passwordAgain = document.getElementById('registerPasswordInputAgain').value;
         if (password !== passwordAgain) {
-            alert('Nem azonosak a jelszavak!');
+            showAlert('Nem azonosak a jelszavak!');
         } else if (username === '' || password === '' || passwordAgain === '') {
-            alert('Nem töltött ki mindent!');
+            showAlert('Nem töltött ki mindent!');
         } else {
             try {
                 await postMethodFetch('http://127.0.0.1:3000/api/register', { username, password });
             } catch (error) {
-                alert('Foglalt felhasználónév!');
+                showAlert('Foglalt felhasználónév!');
             }
         }
     } catch (error) {
@@ -57,13 +40,13 @@ const registerPost = async () => {
     }
 };
 
-const login = async () => {
+const loginPost = async () => {
     try {
         const username = document.getElementById('usernameInput').value;
         const password = document.getElementById('passwordInput').value;
 
         if (username === '' || password === '') {
-            alert('Nem töltött ki mindent!');
+            showAlert('Nem töltött ki mindent!');
         } else {
             try {
                 await postMethodFetch('http://127.0.0.1:3000/api/login', {
@@ -73,7 +56,7 @@ const login = async () => {
 
                 window.location.href = '/';
             } catch (error) {
-                alert('Hibás felhasználónév vagy jelszó!');
+                showAlert('Hibás felhasználónév vagy jelszó!');
             }
         }
     } catch (error) {
@@ -113,3 +96,12 @@ const postMethodFetch = async (url, data) => {
         throw new Error(`Hiba történt: ${error}`);
     }
 };
+
+function showAlert(message) {
+    document.getElementById('alertMessage').innerText = message;
+    document.getElementById('alert').style.display = 'flex';
+}
+
+function closeAlert() {
+    document.getElementById('alert').style.display = 'none';
+}

@@ -20,7 +20,7 @@ USE `lom`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `username` varchar(20) NOT NULL UNIQUE,
-  `password` TEXT NOT NULL,
+  `password` TEXT NOT NULL
 );
 
 -- Struktúra mentése tábla lom. kerdesek
