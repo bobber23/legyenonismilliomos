@@ -32,7 +32,7 @@ async function addQuestion() {
                 console.error(error);
             }
         } else {
-            alert('Nem töltött ki minden mezőt!');
+            alert('Hiba a mezőkben');
         }
     }
 }

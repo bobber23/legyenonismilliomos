@@ -14,8 +14,8 @@
             </div>
             <div id="content">
                 <form id="newQuestion">
-                    <fieldset>
-                        <legend>Új kérdés</legend>
+                    <div id="fauxFieldset">
+                        <h1 id="newQuestionCim">Új kérdés</h1>
                         <div id="titleDifficultyWrapper">
                             <label id="questionTitle">
                                 <p>Kérdés:</p>
@@ -23,7 +23,7 @@
                             </label>
                             <label id="questionDifficulty">
                                 <p>Nehézség:</p>
-                                <input type="number" name="difficulty" />
+                                <input type="number" name="difficulty" placeholder="(1-15)" />
                             </label>
                         </div>
 
@@ -44,7 +44,7 @@
                             <input type="text" name="answerD" maxlength="255" />
                         </label>
 
-                        <label class="correctAnswer">
+                        <div class="correctAnswer">
                             <p>Helyes válasz:</p>
                             <div class="correctAnswerRadioWrapper">
                                 <div class="correctAnswerWrapper">
@@ -84,9 +84,9 @@
                                     />
                                 </div>
                             </div>
-                        </label>
+                        </div>
                         <input type="button" value="Hozzáadás" id="addQuestionBtn" />
-                    </fieldset>
+                    </div>
                 </form>
             </div>
         </div>

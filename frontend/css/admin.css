@@ -1,6 +1,7 @@
 body {
     height: 100vh;
     width: 100vw;
+    max-width: 100vw;
     margin: 0;
 }
 
@@ -43,7 +44,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 20px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-image: url('../background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    color: rgb(255, 207, 20);
 }
 
 #newQuestion {
@@ -54,29 +61,28 @@ body {
     justify-content: center;
 }
 
-fieldset {
-    height: 100%;
-    width: 50%;
-    margin: 0;
-    padding: 10px 50px 0px 50px;
-    border: 1px solid black;
+#newQuestionCim {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5%;
-}
-
-legend {
-    display: flex;
-    margin-left: 25px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 15%;
-    height: 5%;
-    font-size: 22px;
-    border: 1px solid black;
-    font-variant: small-caps;
+    height: 13%;
+    margin: 0;
+}
+
+#fauxFieldset {
+    backdrop-filter: blur(20px);
+    z-index: 0;
+    position: relative;
+    height: 100%;
+    width: 50%;
+    padding: 2% 50px 0px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1%;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 1px rgba(239, 191, 4, 1);
 }
 
 label {
@@ -113,8 +119,11 @@ label {
 
 #questionDifficulty input {
     height: 70%;
-    font-size: 40px;
+    font-size: 3vh;
     appearance: textfield;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 #questionDifficulty input::-webkit-inner-spin-button,
@@ -153,10 +162,12 @@ label {
 .correctAnswer {
     display: flex;
     flex-direction: column;
+    width: 100%;
     height: 10%;
 }
 
 .correctAnswer p {
+    font-size: 20px;
     margin: 0;
 }
 
@@ -183,6 +194,10 @@ label {
     height: 10%;
     width: 100%;
     font-size: 20px;
+}
+
+.correctRadio {
+    outline: red;
 }
 
 .invalid {
