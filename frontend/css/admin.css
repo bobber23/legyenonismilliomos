@@ -84,6 +84,13 @@ label {
     height: 10%;
 }
 
-input[type='text'] {
-    height: 100%;
+#questionTitleLabel {
+    height: 20%;
+}
+
+#questionTitleInput {
+    height: 50%;
+    resize: none;
+    font-size: 16px;
+    padding: 5px 10px 5px 10px;
 }

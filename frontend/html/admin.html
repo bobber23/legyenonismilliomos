@@ -16,9 +16,14 @@
                 <form id="newQuestion">
                     <fieldset>
                         <legend>Új kérdés</legend>
-                        <label>
+                        <label id="questionTitleLabel">
                             Kérdés:
-                            <input type="text" name="question" placeholder="Kérdés címe" />
+                            <textarea
+                                type="text"
+                                name="question"
+                                id="questionTitleInput"
+                                maxlength="255"
+                            ></textarea>
                         </label>
                     </fieldset>
                 </form>
