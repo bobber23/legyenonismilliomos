@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="hu">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bejelentkezés</title>
+        <!--!Bootstrap-->
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
+        <!--?Popper: dropdowns, popovers, tooltips-->
+        <script src="../bootstrap/js/popper.min.js"></script>
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <!--!CSS-->
+        <link rel="stylesheet" href="../css/login.css" />
+        <!--!JavaScript-->
+        <script src="../javascript/login.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h2>Bejelentkezés</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="username">
+                            <label for="usernameInput" class="form-label">Felhasználónév</label>
+                            <input type="text" required class="form-control" id="usernameInput" />
+                        </div>
+                        <div class="password">
+                            <label for="passwordInput" class="form-label">Jelszó</label>
+                            <input type="text" required class="form-control" id="passwordInput" />
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button class="loginBtn btn btn-primary" id="loginBtn">
+                            Bejelentkezés
+                        </button>
+                        <p id="registerLink" class="registerLink">Regisztráció</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

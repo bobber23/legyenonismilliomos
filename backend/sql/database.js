@@ -16,7 +16,16 @@ async function selectall() {
     const [rows] = await pool.execute(query);
     return rows;
 }
+
+//! LOGIN/REGISTER
+async function createUser(username, password) {
+    const query = 'INSERT INTO users(username, password) VALUES(?, ?);';
+    const [rows] = await pool.execute(query, [username, password]);
+    return rows;
+}
+
 //!Export
 module.exports = {
-    selectall
+    selectall,
+    createUser
 };
