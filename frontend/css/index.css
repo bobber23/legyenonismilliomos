@@ -1,9 +1,123 @@
-body {
-    background: #3F308F;
-    background: radial-gradient(circle,rgba(63, 48, 143, 1) 0%, rgba(33, 26, 59, 1) 100%);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-#milliomospng{
-    height: min(30vw, 30vh);
-    width: min(30vw, 30vh);
+@font-face {
+    font-family: 'Oswald';
+    src: url('../fonts/Oswald-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#title {
+    font-family: 'Oswald', sans-serif;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: max(4vw, 4vh);
+    text-align: center;
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+body {
+    background: #3F308F;
+    background: radial-gradient(circle, rgba(63, 48, 143, 1) 0%, rgba(33, 26, 59, 1) 100%);
+    font-family: Oswald;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+#milliomospng {
+    height: max(25vw, 25vh);
+    /*width: max(24.25vw, 24.25vh);*/
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    animation: fadeIn 0.25s ease-in-out;
+    align-self: center;
+    margin: auto;
+}
+
+/* ezt meg sokszor hasznaljuk */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* breathing animacio */
+@keyframes breathing {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: max(4vw, 4vh);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: max(30vh, 30vw);
+}
+
+#loginForm, #registerForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#loginTitle, #registerTitle {
+    font-size: 2rem;
+    stroke-width: 5rem black;
+    color: #ffb77c;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    margin-bottom: max(1.5vw, 1.5vh);
+    font-family: Oswald;
+    text-align: center;
+}
+
+label {
+    font-size: 1.2rem;
+    color: #FFFFFF;
+    margin-bottom: max(0.4vw, 0.4vh);
+    font-family: Oswald;
+}
+
+#showRegister, #showLogin {
+    color: #8fb1f0;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Oswald;
+    margin-top: max(1vw, 1vh);
+}   
+
+a:hover{
+    text-decoration: none;
 }
