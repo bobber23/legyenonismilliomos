@@ -24,8 +24,15 @@ async function createUser(username, password) {
     return rows;
 }
 
+async function findUser(username) {
+    const query = 'SELECT * FROM users WHERE username = ?;';
+    const [rows] = await pool.execute(query, [username]);
+    return rows;
+}
+
 //!Export
 module.exports = {
     selectall,
-    createUser
+    createUser,
+    findUser
 };

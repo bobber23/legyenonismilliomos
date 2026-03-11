@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hu">
     <head>
         <meta charset="UTF-8" />
@@ -15,26 +15,36 @@
         <script src="../javascript/login.js"></script>
     </head>
     <body>
-        <div class="container">
-            <div class="row">
-                <div class="card">
+        <div class="container-fluid">
+            <div class="row cardRow">
+                <div class="card" id="loginForm">
                     <div class="card-header text-center">
                         <h2>Bejelentkezés</h2>
                     </div>
                     <div class="card-body">
                         <div class="username">
                             <label for="usernameInput" class="form-label">Felhasználónév</label>
-                            <input type="text" required class="form-control" id="usernameInput" />
+                            <input
+                                type="text"
+                                required
+                                class="form-control"
+                                id="usernameInput"
+                                placeholder="Adja meg a felhasználónevet"
+                            />
                         </div>
                         <div class="password">
                             <label for="passwordInput" class="form-label">Jelszó</label>
-                            <input type="text" required class="form-control" id="passwordInput" />
+                            <input
+                                type="password"
+                                required
+                                class="form-control"
+                                id="passwordInput"
+                                placeholder="Adja meg a jelszavát"
+                            />
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <button class="loginBtn btn btn-primary" id="loginBtn">
-                            Bejelentkezés
-                        </button>
+                        <button class="loginBtn btn" id="loginBtn">Bejelentkezés</button>
                         <p id="registerLink" class="registerLink">Regisztráció</p>
                     </div>
                 </div>
