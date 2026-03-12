@@ -127,4 +127,31 @@ router.post('/logout', async (request, response) => {
     }
 });
 
+//!Játék
+router.get('/questions/:difficulty', async (request, response) => {
+    try {
+        const kerdes = await database.randomQuestion(request.params.difficulty);
+        response.status(200).json({
+            kerdes: kerdes
+        });
+    } catch (error) {
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
+router.get('/answers/:kid', async (request, response) => {
+    try {
+        const valaszok = await database.answersByKerdesId(request.params.kid);
+        response.status(200).json({
+            valaszok: valaszok
+        });
+    } catch (error) {
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
 module.exports = router;

@@ -30,9 +30,23 @@ async function findUser(username) {
     return rows;
 }
 
+async function randomQuestion(difficulty) {
+    const query = 'SELECT * FROM kerdesek WHERE nehezseg = ? ORDER BY RAND() LIMIT 1;';
+    const [rows] = await pool.execute(query, [difficulty]);
+    return rows;
+}
+
+async function answersByKerdesId(kid) {
+    const query = 'SELECT * FROM valaszok WHERE kid = ?;';
+    const [rows] = await pool.execute(query, [kid]);
+    return rows;
+}
+
 //!Export
 module.exports = {
     selectall,
     createUser,
-    findUser
+    findUser,
+    randomQuestion,
+    answersByKerdesId
 };
