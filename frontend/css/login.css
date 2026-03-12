@@ -277,7 +277,8 @@ a:hover {
 #left2 {
     padding: 2rem;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
     margin-right: max(3vw, 3vh);
     flex: 1;

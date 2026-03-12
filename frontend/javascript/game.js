@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    loginCheck();
+    // loginCheck();
     kerdes();
     levelszinezes();
+    document.getElementById('half').addEventListener('click', felezo);
+    document.getElementById('crowd').addEventListener('click', kozonseg);
 });
 
 const loginCheck = async () => {
@@ -16,12 +18,14 @@ const loginCheck = async () => {
 };
 
 let level = 1;
+let kerdesId;
 const kerdes = async () => {
     try {
         const result = await getMethodFetch(`http://127.0.0.1:3000/api/questions/${level}`);
         const kerdesText = result.kerdes.kerdes;
         const kerdes = document.getElementById('kerdes');
         kerdes.innerHTML = kerdesText;
+        kerdesId = result.kerdes.id;
 
         valaszok(result.kerdes.id);
     } catch (error) {
@@ -34,7 +38,6 @@ const valaszok = async (kid) => {
         const result = await getMethodFetch(`http://127.0.0.1:3000/api/answers/${kid}`);
         const buttondiv = document.getElementById('valaszok');
         buttondiv.replaceChildren();
-        let buttonId = 1;
         result.valaszok.forEach((element) => {
             const button = document.createElement('button');
             button.dataset.id = element.id;
@@ -43,9 +46,46 @@ const valaszok = async (kid) => {
             button.addEventListener('click', () => {
                 checkValasz(element.id);
             });
-            buttonId++;
             buttondiv.appendChild(button);
         });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const felezo = async () => {
+    try {
+        const result = await getMethodFetch(`http://127.0.0.1:3000/api/half/${kerdesId}`);
+        const buttondiv = document.getElementById('valaszok');
+        buttondiv.replaceChildren();
+        result.result.forEach((element) => {
+            const button = document.createElement('button');
+            button.dataset.id = element.id;
+            button.innerHTML = element.valasz;
+            button.classList.add('valasz-btn');
+            button.addEventListener('click', () => {
+                checkValasz(element.id);
+            });
+            buttondiv.appendChild(button);
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const kozonseg = async () => {
+    try {
+        const result = await getMethodFetch(`http://127.0.0.1:3000/api/crowd/${kerdesId}`);
+
+        showAlert(SEGITSEGGG);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const telefon = async () => {
+    try {
+        const result = await getMethodFetch(`http://127.0.0.1:3000/api/phone/${kid}`);
     } catch (error) {
         console.log(error);
     }
@@ -109,11 +149,11 @@ const postMethodFetch = async (url, data) => {
     }
 };
 
-// function showAlert(message) {
-//     document.getElementById('alertMessage').innerText = message;
-//     document.getElementById('alert').style.display = 'flex';
-// }
+function showAlert(message) {
+    document.getElementById('alertMessage').innerText = message;
+    document.getElementById('alert').style.display = 'flex';
+}
 
-// function closeAlert() {
-//     document.getElementById('alert').style.display = 'none';
-// }
+function closeAlert() {
+    document.getElementById('alert').style.display = 'none';
+}

@@ -108,7 +108,7 @@ async function halveAnswers(questionId) {
         `;
         let remainingAnswers = [];
         const [rows] = await pool.execute(sql, [questionId]);
-        remainingAnswers.push(rows);
+        remainingAnswers.push(rows[0]);
         remainingAnswers.push(await correctAnswer(questionId));
         return remainingAnswers;
     } catch (error) {
@@ -124,7 +124,7 @@ async function correctAnswer(questionId) {
         WHERE helyes = 1 AND kid = ?;
         `;
         const [rows] = await pool.execute(sql, [questionId]);
-        return rows;
+        return rows[0];
     } catch (error) {
         throw new Error(error);
     }
@@ -169,7 +169,9 @@ async function phoneCall(questionId) {
         `;
     }
     const [rows] = await pool.execute(sql, [questionId]);
-    return rows; }
+    return rows;
+}
+
 async function randomQuestion(difficulty) {
     const query = 'SELECT * FROM kerdesek WHERE nehezseg = ? ORDER BY RAND() LIMIT 1;';
     const [rows] = await pool.execute(query, [difficulty]);

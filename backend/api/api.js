@@ -190,7 +190,11 @@ router.get('/phone/:questionId', async (request, response) => {
     } catch (error) {
         console.log(error);
         response.status(500).json({
-            message: 'Az /phone végpont gatya' }); } });
+            message: 'Az /phone végpont gatya'
+        });
+    }
+});
+
 //!Játék
 router.get('/questions/:difficulty', async (request, response) => {
     try {
