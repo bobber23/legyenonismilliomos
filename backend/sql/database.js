@@ -17,6 +17,77 @@ async function selectall() {
     return rows;
 }
 
+async function kerdesekLatestId() {
+    const sql = `
+    SELECT id
+    FROM kerdesek
+    ORDER BY id DESC
+    LIMIT 1;`;
+    const [rows] = await pool.execute(sql);
+    return rows[0];
+}
+
+async function valaszokLatestId() {
+    const sql = `
+    SELECT id
+    FROM valaszok
+    ORDER BY id DESC
+    LIMIT 1;`;
+    const [rows] = await pool.execute(sql);
+    return rows[0];
+}
+
+async function addQuestion(question, difficulty) {
+    try {
+        let lstId = await kerdesekLatestId();
+        let newId;
+        if (lstId == undefined) {
+            newId = 1;
+        } else {
+            newId = lstId.id + 1;
+        }
+        const kerdesSQL = `
+        INSERT INTO kerdesek(id, kerdes, nehezseg)
+        VALUES(?,?,?);`;
+        await pool.execute(kerdesSQL, [newId, question, difficulty]);
+        return newId;
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+async function addAnswers(answers, correctAnswer, questionID) {
+    try {
+        for (let i = 0; i < answers.length; i++) {
+            const sql = `
+            INSERT INTO valaszok(id,valasz,kid,helyes)
+            VALUES(?,?,?,?);
+            `;
+
+            let lstId = await valaszokLatestId();
+            let newId;
+            if (lstId == undefined) {
+                newId = 1;
+            } else {
+                newId = lstId.id + 1;
+            }
+
+            console.log(newId);
+
+            let isCorrect = correctAnswer == i ? true : false;
+
+            await pool.execute(sql, [newId, answers[i], questionID, isCorrect]);
+        }
+        return 'success';
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+//!Export
+module.exports = {
+    selectall,
+    addQuestion,
+    addAnswers
 //! LOGIN/REGISTER
 async function createUser(username, password) {
     const query = 'INSERT INTO users(username, password) VALUES(?, ?);';
