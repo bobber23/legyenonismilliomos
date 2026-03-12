@@ -60,6 +60,9 @@ router.post('/addQuestion', upload.none(), async (request, response) => {
         console.log(error);
         response.status(500).json({
             message: 'Az /addQuestion végpont gatya'
+        });
+    }
+});
 //!Login/Register
 router.post('/register', async (request, response) => {
     try {
@@ -140,6 +143,54 @@ router.post('/logout', async (request, response) => {
     } catch (error) {
         response.status(500).json({
             message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
+router.get('/half/:questionId', async (request, response) => {
+    try {
+        const questionId = request.params.questionId;
+        const remainingAnswers = await database.halveAnswers(questionId);
+        response.status(200).json({
+            status: 'success',
+            result: remainingAnswers
+        });
+    } catch (error) {
+        console.log(error);
+        response.status(500).json({
+            message: 'Az /half végpont gatya'
+        });
+    }
+});
+
+router.get('/crowd/:questionId', async (request, response) => {
+    try {
+        const questionId = request.params.questionId;
+        const percentages = await database.crowdVote(questionId);
+        response.status(200).json({
+            status: 'success',
+            result: percentages
+        });
+    } catch (error) {
+        console.log(error);
+        response.status(500).json({
+            message: 'Az /crowd végpont gatya'
+        });
+    }
+});
+
+router.get('/phone/:questionId', async (request, response) => {
+    try {
+        const questionId = request.params.questionId;
+        const phoneAnswer = await database.phoneCall(questionId);
+        response.status(200).json({
+            status: 'success',
+            result: phoneAnswer
+        });
+    } catch (error) {
+        console.log(error);
+        response.status(500).json({
+            message: 'Az /phone végpont gatya'
         });
     }
 });

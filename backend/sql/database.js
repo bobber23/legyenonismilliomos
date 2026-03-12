@@ -83,11 +83,7 @@ async function addAnswers(answers, correctAnswer, questionID) {
         throw new Error(error);
     }
 }
-//!Export
-module.exports = {
-    selectall,
-    addQuestion,
-    addAnswers
+
 //! LOGIN/REGISTER
 async function createUser(username, password) {
     const query = 'INSERT INTO users(username, password) VALUES(?, ?);';
@@ -101,9 +97,90 @@ async function findUser(username) {
     return rows;
 }
 
+async function halveAnswers(questionId) {
+    try {
+        const sql = `
+        SELECT *
+        FROM valaszok
+        WHERE helyes != 1 AND kid = ?
+        ORDER BY rand()
+        LIMIT 1;
+        `;
+        let remainingAnswers = [];
+        const [rows] = await pool.execute(sql, [questionId]);
+        remainingAnswers.push(rows);
+        remainingAnswers.push(await correctAnswer(questionId));
+        return remainingAnswers;
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+async function correctAnswer(questionId) {
+    try {
+        const sql = `
+        SELECT *
+        FROM valaszok
+        WHERE helyes = 1 AND kid = ?;
+        `;
+        const [rows] = await pool.execute(sql, [questionId]);
+        return rows;
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+async function crowdVote(questionId) {
+    try {
+        let remainingPercent = 100;
+        const sql = `
+        SELECT *
+        FROM valaszok
+        WHERE kid = ?
+        ORDER BY helyes ASC;`;
+        const [rows] = await pool.execute(sql, [questionId]);
+        for (let i = 0; i < rows.length - 1; i++) {
+            let rand = Math.floor(Math.random() * 15 + 3);
+            rows[i]['szazelek'] = rand;
+            remainingPercent -= rand;
+        }
+        rows[rows.length - 1]['szazelek'] = remainingPercent;
+        return rows;
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+async function phoneCall(questionId) {
+    let sql;
+    if (Math.floor(Math.random() * 100) > 20) {
+        sql = `
+        SELECT *
+        FROM valaszok
+        WHERE helyes = 1 AND kid = ?
+        `;
+    } else {
+        sql = ` 
+        SELECT *
+        FROM valaszok
+        WHERE helyes != 1 AND kid = ?
+        ORDER BY rand()
+        LIMIT 1;
+        `;
+    }
+    const [rows] = await pool.execute(sql, [questionId]);
+    return rows;
+}
+
 //!Export
 module.exports = {
     selectall,
     createUser,
-    findUser
+    findUser,
+    addQuestion,
+    addAnswers,
+    halveAnswers,
+    correctAnswer,
+    crowdVote,
+    phoneCall
 };
