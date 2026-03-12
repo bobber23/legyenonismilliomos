@@ -16,6 +16,13 @@
 CREATE DATABASE IF NOT EXISTS `lom` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_hungarian_ci */;
 USE `lom`;
 
+-- Users tábla
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL UNIQUE,
+  `password` TEXT NOT NULL
+);
+
 -- Struktúra mentése tábla lom. kerdesek
 CREATE TABLE IF NOT EXISTS `kerdesek` (
   `id` int(11) NOT NULL,
