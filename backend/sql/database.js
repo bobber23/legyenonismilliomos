@@ -83,11 +83,7 @@ async function addAnswers(answers, correctAnswer, questionID) {
         throw new Error(error);
     }
 }
-//!Export
-module.exports = {
-    selectall,
-    addQuestion,
-    addAnswers
+
 //! LOGIN/REGISTER
 async function createUser(username, password) {
     const query = 'INSERT INTO users(username, password) VALUES(?, ?);';
@@ -116,6 +112,8 @@ async function answersByKerdesId(kid) {
 //!Export
 module.exports = {
     selectall,
+    addQuestion,
+    addAnswers,
     createUser,
     findUser,
     randomQuestion,

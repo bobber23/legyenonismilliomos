@@ -60,6 +60,10 @@ router.post('/addQuestion', upload.none(), async (request, response) => {
         console.log(error);
         response.status(500).json({
             message: 'Az /addQuestion végpont gatya'
+        });
+    }
+});
+
 //!Login/Register
 router.post('/register', async (request, response) => {
     try {
