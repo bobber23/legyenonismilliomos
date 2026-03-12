@@ -100,13 +100,19 @@ async function findUser(username) {
 async function randomQuestion(difficulty) {
     const query = 'SELECT * FROM kerdesek WHERE nehezseg = ? ORDER BY RAND() LIMIT 1;';
     const [rows] = await pool.execute(query, [difficulty]);
-    return rows;
+    return rows[0];
 }
 
 async function answersByKerdesId(kid) {
     const query = 'SELECT * FROM valaszok WHERE kid = ?;';
     const [rows] = await pool.execute(query, [kid]);
     return rows;
+}
+
+async function checkAnswer(id) {
+    const query = 'SELECT * FROM valaszok WHERE id = ?;';
+    const [rows] = await pool.execute(query, [id]);
+    return rows[0];
 }
 
 //!Export
@@ -117,5 +123,6 @@ module.exports = {
     createUser,
     findUser,
     randomQuestion,
-    answersByKerdesId
+    answersByKerdesId,
+    checkAnswer
 };
