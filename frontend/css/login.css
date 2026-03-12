@@ -332,6 +332,18 @@ a:hover {
     overflow: hidden;
 }
 
+.active-level {
+    background-color: #e08a51 !important;
+}
+
+.active-level .prize-index {
+    color: rgb(99, 0, 212);
+}
+
+.active-level .prize-amount {
+    color: rgb(99, 0, 212);
+}
+
 .valasz-btn::before {
     content: '';
     position: absolute;

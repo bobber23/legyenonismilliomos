@@ -1,13 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
+    loginCheck();
     kerdes();
+    levelszinezes();
 });
+
+const loginCheck = async () => {
+    try {
+        const result = await getMethodFetch('http://127.0.0.1:3000/api/me');
+        if (result.loggedIn === false) {
+            window.location.href = '/login';
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 let level = 1;
 const kerdes = async () => {
     try {
         const result = await getMethodFetch(`http://127.0.0.1:3000/api/questions/${level}`);
         const kerdesText = result.kerdes.kerdes;
-        console.log(kerdesText);
+        const kerdes = document.getElementById('kerdes');
+        kerdes.innerHTML = kerdesText;
 
         valaszok(result.kerdes.id);
     } catch (error) {
@@ -18,13 +32,14 @@ const kerdes = async () => {
 const valaszok = async (kid) => {
     try {
         const result = await getMethodFetch(`http://127.0.0.1:3000/api/answers/${kid}`);
-        const buttondiv = document.getElementById('buttonDiv');
+        const buttondiv = document.getElementById('valaszok');
         buttondiv.replaceChildren();
         let buttonId = 1;
         result.valaszok.forEach((element) => {
             const button = document.createElement('button');
             button.dataset.id = element.id;
             button.innerHTML = element.valasz;
+            button.classList.add('valasz-btn');
             button.addEventListener('click', () => {
                 checkValasz(element.id);
             });
@@ -42,10 +57,23 @@ const checkValasz = async (valaszid) => {
         if (isCorrect.isCorrect === true) {
             level++;
             kerdes();
+            levelszinezes();
         } else {
             console.log('A játéknak vége');
             level = 1;
         }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const levelszinezes = async () => {
+    try {
+        const li = document.querySelectorAll('li');
+        li.forEach((element) => {
+            element.classList.remove('active-level');
+        });
+        li[15 - level].classList.add('active-level');
     } catch (error) {
         console.log(error);
     }
