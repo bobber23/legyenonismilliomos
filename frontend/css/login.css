@@ -18,6 +18,7 @@
     font-size: max(4vw, 4vh);
     text-align: center;
     animation: fadeIn 0.25s ease-in-out;
+    margin-top: 3vh;
 }
 
 body {
@@ -76,7 +77,6 @@ body {
 .form-container {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
-    padding: max(4vw, 4vh);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     width: 85%;
     display: flex;
@@ -93,6 +93,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 #loginTitle,
@@ -113,15 +115,22 @@ label {
     font-family: Oswald;
 }
 
+input {
+    width: 70%;
+    height: 60%;
+}
+
 #showRegister,
 #showLogin {
     color: #8fb1f0;
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.5em 0.5em;
     border-radius: 5px;
     cursor: pointer;
     font-family: Oswald;
     margin-top: max(1vw, 1vh);
+    font-size: 1em;
+    white-space: nowrap;
 }
 
 a:hover {
@@ -161,4 +170,281 @@ a:hover {
     color: white;
     border-radius: 6px;
     cursor: pointer;
+}
+#registerSubmit,
+#loginSubmit {
+    background-color: #6a9eff;
+    color: #ffffff;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Oswald;
+    margin-top: max(1vw, 1vh);
+    font-size: 1em;
+}
+
+/* jatek kozbeni dizajn */
+.prize-list {
+    list-style: none;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(1vh);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 1px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    counter-reset: prize-counter;
+    width: 100%;
+}
+
+.prize-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: clamp(0.1rem, 0.25vw, 0.5rem) clamp(0.5rem, 1vw, 1rem);
+    margin-bottom: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: Oswald;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    transition: all 0.3s ease;
+    border-left: 3px solid #6a9eff;
+}
+
+.prize-list li:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(2vh);
+    box-shadow: 0 4px 12px rgba(106, 158, 255, 0.3);
+}
+
+.prize-index {
+    font-weight: bold;
+    color: #ffb77c;
+    min-width: 2rem;
+    font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+}
+
+.prize-amount {
+    font-weight: 600;
+    color: #e08a51;
+    text-align: right;
+    flex-grow: 1;
+    padding-left: 1rem;
+}
+
+.prize2-index {
+    font-weight: bold;
+    color: #dbcfc7;
+    min-width: 2rem;
+    font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+}
+
+.prize2-amount {
+    font-weight: 600;
+    color: #ebdbd1;
+    text-align: right;
+    flex-grow: 1;
+    padding-left: 1rem;
+}
+
+#kerdes {
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    color: #ffffff;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    font-family: Oswald;
+    text-align: center;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.game-container {
+    padding: 2rem 1rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-container .row {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#left2 {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: max(3vw, 3vh);
+    flex: 1;
+    min-width: 0;
+}
+
+#right2 {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+}
+
+.question-container {
+    width: 80%;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.answers-grid {
+    display: grid;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    width: 100%;
+}
+
+.valasz-btn {
+    background: linear-gradient(
+        135deg,
+        rgba(106, 158, 255, 0.2) 0%,
+        rgba(143, 177, 240, 0.15) 100%
+    );
+    border: 2px solid rgba(106, 158, 255, 0.4);
+    border-radius: 12px;
+    padding: clamp(1.2rem, 2vw, 1.8rem);
+    color: #ffffff;
+    font-family: Oswald;
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.4, 0.6, 1);
+    text-align: center;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(106, 158, 255, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.active-level {
+    background-color: #e08a51 !important;
+}
+
+.active-level .prize-index {
+    color: rgb(99, 0, 212);
+}
+
+.active-level .prize-amount {
+    color: rgb(99, 0, 212);
+}
+
+.valasz-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.valasz-btn:hover::before {
+    left: 100%;
+}
+
+.valasz-btn:hover {
+    background: linear-gradient(135deg, rgba(120, 157, 228, 0.4) 0%, rgba(143, 177, 240, 0.3) 100%);
+    border-color: #6a9eff;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(106, 158, 255, 0.35);
+}
+
+.valasz-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(106, 158, 255, 0.25);
+}
+
+/* ezt majd akkor ha a buttont kivalasztottuk */
+.valasz-btn.selected {
+    background: linear-gradient(135deg, #6a9eff 0%, #5a8eee 100%);
+    border-color: #4a7eee;
+    box-shadow: 0 8px 30px rgba(106, 158, 255, 0.5);
+}
+/* eszt majd ha a valasz asz helyes */
+.valasz-btn.correct {
+    background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+    border-color: #16a34a;
+    box-shadow: 0 8px 30px rgba(74, 222, 128, 0.5);
+}
+/* eszt pedig ha a valasz asz helytelen */
+.valasz-btn.incorrect {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    border-color: #b91c1c;
+    box-shadow: 0 8px 30px rgba(239, 68, 68, 0.5);
+}
+
+@media (max-width: 1024px) {
+    .game-container {
+        padding: 1rem;
+    }
+
+    .question-container {
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+    }
+
+    .answers-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    #left {
+        margin-bottom: 2rem;
+    }
+
+    .question-container {
+        padding: 1.5rem;
+    }
+
+    #kerdes {
+        margin-bottom: 1.5rem;
+    }
+
+    .answers-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .valasz-btn {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        padding: 0.5rem;
+    }
+
+    .question-container {
+        padding: 1rem;
+        border-radius: 15px;
+    }
+
+    #kerdes {
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .valasz-btn {
+        padding: 0.9rem;
+        font-size: 0.95rem;
+    }
 }

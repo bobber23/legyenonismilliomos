@@ -169,18 +169,37 @@ async function phoneCall(questionId) {
         `;
     }
     const [rows] = await pool.execute(sql, [questionId]);
+    return rows; }
+async function randomQuestion(difficulty) {
+    const query = 'SELECT * FROM kerdesek WHERE nehezseg = ? ORDER BY RAND() LIMIT 1;';
+    const [rows] = await pool.execute(query, [difficulty]);
+    return rows[0];
+}
+
+async function answersByKerdesId(kid) {
+    const query = 'SELECT * FROM valaszok WHERE kid = ?;';
+    const [rows] = await pool.execute(query, [kid]);
     return rows;
+}
+
+async function checkAnswer(id) {
+    const query = 'SELECT * FROM valaszok WHERE id = ?;';
+    const [rows] = await pool.execute(query, [id]);
+    return rows[0];
 }
 
 //!Export
 module.exports = {
     selectall,
-    createUser,
-    findUser,
     addQuestion,
     addAnswers,
+    createUser,
+    findUser,
     halveAnswers,
     correctAnswer,
     crowdVote,
-    phoneCall
+    phoneCall,
+    randomQuestion,
+    answersByKerdesId,
+    checkAnswer
 };

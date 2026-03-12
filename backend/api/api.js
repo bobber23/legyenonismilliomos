@@ -190,7 +190,44 @@ router.get('/phone/:questionId', async (request, response) => {
     } catch (error) {
         console.log(error);
         response.status(500).json({
-            message: 'Az /phone végpont gatya'
+            message: 'Az /phone végpont gatya' }); } });
+//!Játék
+router.get('/questions/:difficulty', async (request, response) => {
+    try {
+        const kerdes = await database.randomQuestion(request.params.difficulty);
+        response.status(200).json({
+            kerdes: kerdes
+        });
+    } catch (error) {
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
+router.get('/answers/:kid', async (request, response) => {
+    try {
+        const valaszok = await database.answersByKerdesId(request.params.kid);
+        response.status(200).json({
+            valaszok: valaszok
+        });
+    } catch (error) {
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
+router.get('/answer/:id', async (request, response) => {
+    try {
+        const valasz = await database.checkAnswer(request.params.id);
+        let isCorrect = valasz.helyes == 1 ? true : false;
+        response.status(200).json({
+            isCorrect: isCorrect
+        });
+    } catch (error) {
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
         });
     }
 });
