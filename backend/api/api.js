@@ -175,4 +175,18 @@ router.get('/answers/:kid', async (request, response) => {
     }
 });
 
+router.get('/answer/:id', async (request, response) => {
+    try {
+        const valasz = await database.checkAnswer(request.params.id);
+        let isCorrect = valasz.helyes == 1 ? true : false;
+        response.status(200).json({
+            isCorrect: isCorrect
+        });
+    } catch (error) {
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
 module.exports = router;
