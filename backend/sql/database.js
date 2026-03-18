@@ -130,8 +130,60 @@ async function correctAnswer(questionId) {
     }
 }
 
-async function crowdVote(questionId) {
+async function crowdVote(questionId, difficulty) {
     try {
+        let chance;
+        switch (difficulty) {
+            case 1:
+                chance = 3;
+                break;
+            case 2:
+                chance = 4;
+                break;
+            case 3:
+                chance = 5;
+                break;
+            case 4:
+                chance = 6;
+                break;
+            case 5:
+                chance = 7;
+                break;
+            case 6:
+                chance = 8;
+                break;
+            case 7:
+                chance = 9;
+                break;
+            case 8:
+                chance = 10;
+                break;
+            case 9:
+                chance = 11;
+                break;
+            case 10:
+                chance = 12;
+                break;
+            case 11:
+                chance = 13;
+                break;
+            case 12:
+                chance = 14;
+                break;
+            case 13:
+                chance = 15;
+                break;
+            case 14:
+                chance = 16;
+                break;
+            case 15:
+                chance = 17;
+                break;
+            default:
+                chance = 6;
+                break;
+        }
+
         let remainingPercent = 100;
         const sql = `
         SELECT *
@@ -140,20 +192,82 @@ async function crowdVote(questionId) {
         ORDER BY helyes ASC;`;
         const [rows] = await pool.execute(sql, [questionId]);
         for (let i = 0; i < rows.length - 1; i++) {
-            let rand = Math.floor(Math.random() * 15 + 3);
+            let rand = Math.floor(Math.random() * 15 + chance);
             rows[i]['szazelek'] = rand;
             remainingPercent -= rand;
         }
         rows[rows.length - 1]['szazelek'] = remainingPercent;
-        return rows;
+        let result = rows;
+        for (let i = 0; i < result.length - 1; i++) {
+            for (let j = i + 1; j < result.length; j++) {
+                if (rows[i].id > rows[j].id) {
+                    let temp = rows[i];
+                    rows[i] = rows[j];
+                    rows[j] = temp;
+                }
+            }
+        }
+
+        return result;
     } catch (error) {
         throw new Error(error);
     }
 }
 
-async function phoneCall(questionId) {
+async function phoneCall(questionId, difficulty) {
     let sql;
-    if (Math.floor(Math.random() * 100) > 20) {
+    let chance;
+    switch (difficulty) {
+        case 1:
+            chance = 10;
+            break;
+        case 2:
+            chance = 15;
+            break;
+        case 3:
+            chance = 20;
+            break;
+        case 4:
+            chance = 25;
+            break;
+        case 5:
+            chance = 30;
+            break;
+        case 6:
+            chance = 35;
+            break;
+        case 7:
+            chance = 40;
+            break;
+        case 8:
+            chance = 45;
+            break;
+        case 9:
+            chance = 50;
+            break;
+        case 10:
+            chance = 55;
+            break;
+        case 11:
+            chance = 60;
+            break;
+        case 12:
+            chance = 65;
+            break;
+        case 13:
+            chance = 70;
+            break;
+        case 14:
+            chance = 75;
+            break;
+        case 15:
+            chance = 80;
+            break;
+        default:
+            chance = 50;
+            break;
+    }
+    if (Math.floor(Math.random() * 100) > chance) {
         sql = `
         SELECT *
         FROM valaszok
