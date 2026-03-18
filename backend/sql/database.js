@@ -197,7 +197,6 @@ async function crowdVote(questionId, difficulty) {
             remainingPercent -= rand;
         }
         rows[rows.length - 1]['szazelek'] = remainingPercent;
-        console.log(rows);
         let result = rows;
         for (let i = 0; i < result.length - 1; i++) {
             for (let j = i + 1; j < result.length; j++) {
