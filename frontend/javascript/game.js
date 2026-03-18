@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     levelszinezes();
     document.getElementById('half').addEventListener('click', felezo);
     document.getElementById('crowd').addEventListener('click', kozonseg);
+    document.getElementById('phone').addEventListener('click', telefon);
 });
 
 const loginCheck = async () => {
@@ -66,6 +67,8 @@ const valaszok = async (kid) => {
 
 const felezo = async () => {
     try {
+        document.getElementById('half').classList.add('usedHelp');
+        document.getElementById('half').classList.add('disabledHelp');
         const result = await getMethodFetch(`http://127.0.0.1:3000/api/half/${kerdesId}`);
         const buttondiv = document.getElementById('valaszok');
         buttondiv.replaceChildren();
@@ -97,15 +100,79 @@ const felezo = async () => {
 
 const kozonseg = async () => {
     try {
-        const result = await getMethodFetch(`http://127.0.0.1:3000/api/crowd/${kerdesId}`);
+        let crowd = document.getElementById('crowd');
+        if (!crowd.classList.contains('usedHelp')) {
+            const { status, result } = await postMethodFetch(`http://127.0.0.1:3000/api/crowd`, {
+                questionId: kerdesId,
+                difficulty: level
+            });
+
+            crowd.classList.add('usedHelp');
+            let helps = document.querySelectorAll('.helpBtn');
+
+            for (const help of helps) {
+                if (help != crowd) {
+                    help.classList.add('disabledHelp');
+                }
+            }
+
+            let percentageDiv = document.getElementById('crowdPercentageDiv');
+            percentageDiv.replaceChildren();
+            let answerDiv = document.getElementById('crowdAnswerDiv');
+            answerDiv.replaceChildren();
+            for (const answer of result) {
+                console.log(answer);
+                const answerTitle = document.createElement('p');
+                answerTitle.innerText = answer.valasz;
+                answerDiv.appendChild(answerTitle);
+
+                const percentage = document.createElement('div');
+                percentage.classList.add('percentageColumn');
+                percentage.style.height = answer.szazelek + '%';
+                percentage.style.textAlign = 'center';
+                percentageDiv.appendChild(percentage);
+            }
+            document.getElementById('crowd').classList.add('usedHelp');
+        }
     } catch (error) {
         console.log(error);
     }
 };
 
+let helpDialog = '';
 const telefon = async () => {
+    let dialogs = [
+        'HALLÓ, KI AZ?\nHALLÓ!\nVISZLÁT!',
+        'Pfú, elég nehéz kérdés, de én szerintem a helyes válasz a(z): ',
+        'Nagyon egyszerű a válasz a(z): ',
+        'Hát haver asszem a(z): ',
+        'Kisfiam ez bizony a(z): '
+    ];
     try {
-        const result = await getMethodFetch(`http://127.0.0.1:3000/api/phone/${kid}`);
+        if (helpDialog == '') {
+            let phone = document.getElementById('phone');
+            phone.classList.add('usedHelp');
+
+            let helps = document.querySelectorAll('.helpBtn');
+
+            for (const help of helps) {
+                if (help != phone) {
+                    help.classList.add('disabledHelp');
+                }
+            }
+
+            const { status, result } = await postMethodFetch(`http://127.0.0.1:3000/api/phone`, {
+                questionId: kerdesId,
+                difficulty: level
+            });
+            let random = Math.floor(Math.random() * dialogs.length);
+            if (random == 0) {
+                helpDialog = dialogs[random];
+            } else {
+                helpDialog = dialogs[random] + result[0].valasz;
+            }
+        }
+        document.getElementById('phoneP').innerText = helpDialog;
     } catch (error) {
         console.log(error);
     }
@@ -122,6 +189,14 @@ const checkValasz = async (valaszid) => {
                 level++;
                 kerdes();
                 levelszinezes();
+              let helps = document.querySelectorAll('.helpBtn');
+            for (const help of helps) {
+                if (help.classList.contains('usedHelp')) {
+                    help.classList.add('disabledHelp');
+                } else {
+                    help.classList.remove('disabledHelp');
+                }
+            }
             }, 4000);
         } else {
             button.classList.remove('selected');
