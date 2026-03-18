@@ -119,7 +119,13 @@ const kozonseg = async () => {
 
 let helpDialog = '';
 const telefon = async () => {
-    let dialogs = ['Pfú, elég nehéz kérdés, de én szerintem a helyes válasz a(z): '];
+    let dialogs = [
+        'HALLÓ, KI AZ?\nHALLÓ!\nVISZLÁT!',
+        'Pfú, elég nehéz kérdés, de én szerintem a helyes válasz a(z): ',
+        'Nagyon egyszerű a válasz a(z): ',
+        'Hát haver asszem a(z): ',
+        'Kisfiam ez bizony a(z): '
+    ];
     try {
         if (helpDialog == '') {
             let phone = document.getElementById('phone');
@@ -137,12 +143,12 @@ const telefon = async () => {
                 questionId: kerdesId,
                 difficulty: level
             });
-
-            helpDialog =
-                '"' +
-                dialogs[Math.floor(Math.random() * (dialogs.length - 1))] +
-                result[0].valasz +
-                '"';
+            let random = Math.floor(Math.random() * dialogs.length);
+            if (random == 0) {
+                helpDialog = dialogs[random];
+            } else {
+                helpDialog = dialogs[random] + result[0].valasz;
+            }
         }
         document.getElementById('phoneP').innerText = helpDialog;
     } catch (error) {
