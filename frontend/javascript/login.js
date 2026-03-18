@@ -31,6 +31,7 @@ const registerPost = async () => {
         } else {
             try {
                 await postMethodFetch('http://127.0.0.1:3000/api/register', { username, password });
+                showAlert('Sikeres regisztráció! Most már bejelentkezhetsz!');
             } catch (error) {
                 showAlert('Foglalt felhasználónév!');
             }
