@@ -191,7 +191,7 @@ a:hover {
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(1vh);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 1px;
+    border-radius: 15px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     counter-reset: prize-counter;
     width: 100%;
@@ -319,10 +319,10 @@ a:hover {
     );
     border: 2px solid rgba(106, 158, 255, 0.4);
     border-radius: 12px;
-    padding: clamp(1.2rem, 2vw, 1.8rem);
+    padding: clamp(1rem, 1.25vw, 1.5rem);
     color: #ffffff;
     font-family: Oswald;
-    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    font-size: clamp(1rem, 1.2vw, 1.3rem);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.25, 0.4, 0.6, 1);
@@ -454,4 +454,25 @@ a:hover {
         padding: 0.9rem;
         font-size: 0.95rem;
     }
+}
+
+.segitseg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: max(2vw, 2vh);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: clamp(1rem, 1vw, 3rem);
+    margin-top: clamp(1.5rem, 1vw, 2.5rem);
+    width: 80%;
+}
+
+.helpimage {
+    width: max(3vw, 3vh);
+    height: max(3vw, 3vh);
+    object-fit: contain;
+    border: rgb(0, 183, 255) 2px solid;
 }
