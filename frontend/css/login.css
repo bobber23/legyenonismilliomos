@@ -449,3 +449,72 @@ a:hover {
         font-size: 0.95rem;
     }
 }
+
+.segitseg {
+    width: 80%;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: clamp(0.5rem, 1.25vw, 0.875rem);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.5s ease-in-out;
+
+    display: flex;
+    flex-direction: row;
+    gap: clamp(0.5rem, 1.25vw, 0.875rem);
+}
+
+.helpBtn {
+    flex: 1 1 0;
+    background: linear-gradient(
+        135deg,
+        rgba(106, 158, 255, 0.2) 0%,
+        rgba(143, 177, 240, 0.15) 100%
+    );
+    border: 2px solid rgba(106, 158, 255, 0.4);
+    border-radius: 12px;
+    padding: clamp(0.6rem, 1vw, 0.9rem);
+    color: #ffffff;
+    font-family: Oswald;
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.4, 0.6, 1);
+    text-align: center;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(106, 158, 255, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.helpBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.helpBtn:hover::before {
+    left: 100%;
+}
+
+.helpBtn:hover {
+    background: linear-gradient(135deg, rgba(120, 157, 228, 0.4) 0%, rgba(143, 177, 240, 0.3) 100%);
+    border-color: #6a9eff;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(106, 158, 255, 0.35);
+}
+
+.helpBtn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(106, 158, 255, 0.25);
+}
+
+.usedHelp {
+    pointer-events: none;
+    filter: grayscale(75%);
+}

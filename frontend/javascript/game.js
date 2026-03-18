@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     levelszinezes();
     document.getElementById('half').addEventListener('click', felezo);
     document.getElementById('crowd').addEventListener('click', kozonseg);
+    document.getElementById('phone').addEventListener('click', telefon);
 });
 
 const loginCheck = async () => {
@@ -55,6 +56,7 @@ const valaszok = async (kid) => {
 
 const felezo = async () => {
     try {
+        document.getElementById('half').classList.add('usedHelp');
         const result = await getMethodFetch(`http://127.0.0.1:3000/api/half/${kerdesId}`);
         const buttondiv = document.getElementById('valaszok');
         buttondiv.replaceChildren();
@@ -75,6 +77,8 @@ const felezo = async () => {
 
 const kozonseg = async () => {
     try {
+        document.getElementById('crowd').classList.add('usedHelp');
+
         const result = await getMethodFetch(`http://127.0.0.1:3000/api/crowd/${kerdesId}`);
 
         showAlert(SEGITSEGGG);
@@ -85,6 +89,7 @@ const kozonseg = async () => {
 
 const telefon = async () => {
     try {
+        document.getElementById('phone').classList.add('usedHelp');
         const result = await getMethodFetch(`http://127.0.0.1:3000/api/phone/${kid}`);
     } catch (error) {
         console.log(error);
