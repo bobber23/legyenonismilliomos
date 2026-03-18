@@ -44,7 +44,10 @@ const valaszok = async (kid) => {
             button.innerHTML = element.valasz;
             button.classList.add('valasz-btn');
             button.addEventListener('click', () => {
-                checkValasz(element.id);
+                button.classList.add('valasz-btn.selected');
+                setTimeout(() => {
+                    checkValasz(element.id);
+                }, 5000);
             });
             buttondiv.appendChild(button);
         });
@@ -76,8 +79,6 @@ const felezo = async () => {
 const kozonseg = async () => {
     try {
         const result = await getMethodFetch(`http://127.0.0.1:3000/api/crowd/${kerdesId}`);
-
-        showAlert(SEGITSEGGG);
     } catch (error) {
         console.log(error);
     }
