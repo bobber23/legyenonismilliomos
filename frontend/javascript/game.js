@@ -44,7 +44,15 @@ const valaszok = async (kid) => {
             button.innerHTML = element.valasz;
             button.classList.add('valasz-btn');
             button.addEventListener('click', () => {
-                button.classList.add('valasz-btn.selected');
+                const allButton = buttondiv.querySelectorAll('.valasz-btn');
+
+                allButton.forEach((element) => {
+                    if (element !== button) {
+                        element.disabled = true;
+                    }
+                });
+
+                button.classList.add('selected');
                 setTimeout(() => {
                     checkValasz(element.id);
                 }, 5000);
@@ -67,7 +75,18 @@ const felezo = async () => {
             button.innerHTML = element.valasz;
             button.classList.add('valasz-btn');
             button.addEventListener('click', () => {
-                checkValasz(element.id);
+                const allButton = buttondiv.querySelectorAll('.valasz-btn');
+
+                allButton.forEach((element) => {
+                    if (element !== button) {
+                        element.disabled = true;
+                    }
+                });
+
+                button.classList.add('selected');
+                setTimeout(() => {
+                    checkValasz(element.id);
+                }, 5000);
             });
             buttondiv.appendChild(button);
         });
@@ -95,12 +114,18 @@ const telefon = async () => {
 const checkValasz = async (valaszid) => {
     try {
         const isCorrect = await getMethodFetch(`http://127.0.0.1:3000/api/answer/${valaszid}`);
+        const button = document.querySelector('.selected');
         if (isCorrect.isCorrect === true) {
-            level++;
-            kerdes();
-            levelszinezes();
+            button.classList.remove('selected');
+            button.classList.add('correct');
+            setTimeout(() => {
+                level++;
+                kerdes();
+                levelszinezes();
+            }, 4000);
         } else {
-            console.log('A játéknak vége');
+            button.classList.remove('selected');
+            button.classList.add('incorrect');
             level = 1;
         }
     } catch (error) {
