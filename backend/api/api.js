@@ -163,10 +163,10 @@ router.get('/half/:questionId', async (request, response) => {
     }
 });
 
-router.get('/crowd/:questionId', async (request, response) => {
+router.post('/crowd', async (request, response) => {
     try {
-        const questionId = request.params.questionId;
-        const percentages = await database.crowdVote(questionId);
+        const { questionId, difficulty } = request.body;
+        const percentages = await database.crowdVote(questionId, difficulty);
         response.status(200).json({
             status: 'success',
             result: percentages
@@ -179,10 +179,10 @@ router.get('/crowd/:questionId', async (request, response) => {
     }
 });
 
-router.get('/phone/:questionId', async (request, response) => {
+router.post('/phone', async (request, response) => {
     try {
-        const questionId = request.params.questionId;
-        const phoneAnswer = await database.phoneCall(questionId);
+        const { questionId, difficulty } = request.body;
+        const phoneAnswer = await database.phoneCall(questionId, difficulty);
         response.status(200).json({
             status: 'success',
             result: phoneAnswer

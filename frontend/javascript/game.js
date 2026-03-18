@@ -57,6 +57,7 @@ const valaszok = async (kid) => {
 const felezo = async () => {
     try {
         document.getElementById('half').classList.add('usedHelp');
+        document.getElementById('half').classList.add('disabledHelp');
         const result = await getMethodFetch(`http://127.0.0.1:3000/api/half/${kerdesId}`);
         const buttondiv = document.getElementById('valaszok');
         buttondiv.replaceChildren();
@@ -77,20 +78,73 @@ const felezo = async () => {
 
 const kozonseg = async () => {
     try {
-        document.getElementById('crowd').classList.add('usedHelp');
+        let crowd = document.getElementById('crowd');
+        if (!crowd.classList.contains('usedHelp')) {
+            const { status, result } = await postMethodFetch(`http://127.0.0.1:3000/api/crowd`, {
+                questionId: kerdesId,
+                difficulty: level
+            });
 
-        const result = await getMethodFetch(`http://127.0.0.1:3000/api/crowd/${kerdesId}`);
+            crowd.classList.add('usedHelp');
+            let helps = document.querySelectorAll('.helpBtn');
 
-        showAlert(SEGITSEGGG);
+            for (const help of helps) {
+                if (help != crowd) {
+                    help.classList.add('disabledHelp');
+                }
+            }
+
+            let percentageDiv = document.getElementById('crowdPercentageDiv');
+            percentageDiv.replaceChildren();
+            let answerDiv = document.getElementById('crowdAnswerDiv');
+            answerDiv.replaceChildren();
+            for (const answer of result) {
+                console.log(answer);
+                const answerTitle = document.createElement('p');
+                answerTitle.innerText = answer.valasz;
+                answerDiv.appendChild(answerTitle);
+
+                const percentage = document.createElement('div');
+                percentage.classList.add('percentageColumn');
+                percentage.style.height = answer.szazelek + '%';
+                percentage.style.textAlign = 'center';
+                percentageDiv.appendChild(percentage);
+            }
+            document.getElementById('crowd').classList.add('usedHelp');
+        }
     } catch (error) {
         console.log(error);
     }
 };
 
+let helpDialog = '';
 const telefon = async () => {
+    let dialogs = ['Pfú, elég nehéz kérdés, de én szerintem a helyes válasz a(z): '];
     try {
-        document.getElementById('phone').classList.add('usedHelp');
-        const result = await getMethodFetch(`http://127.0.0.1:3000/api/phone/${kid}`);
+        if (helpDialog == '') {
+            let phone = document.getElementById('phone');
+            phone.classList.add('usedHelp');
+
+            let helps = document.querySelectorAll('.helpBtn');
+
+            for (const help of helps) {
+                if (help != phone) {
+                    help.classList.add('disabledHelp');
+                }
+            }
+
+            const { status, result } = await postMethodFetch(`http://127.0.0.1:3000/api/phone`, {
+                questionId: kerdesId,
+                difficulty: level
+            });
+
+            helpDialog =
+                '"' +
+                dialogs[Math.floor(Math.random() * (dialogs.length - 1))] +
+                result[0].valasz +
+                '"';
+        }
+        document.getElementById('phoneP').innerText = helpDialog;
     } catch (error) {
         console.log(error);
     }
@@ -103,6 +157,14 @@ const checkValasz = async (valaszid) => {
             level++;
             kerdes();
             levelszinezes();
+            let helps = document.querySelectorAll('.helpBtn');
+            for (const help of helps) {
+                if (help.classList.contains('usedHelp')) {
+                    help.classList.add('disabledHelp');
+                } else {
+                    help.classList.remove('disabledHelp');
+                }
+            }
         } else {
             console.log('A játéknak vége');
             level = 1;
