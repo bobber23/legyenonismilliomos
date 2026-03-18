@@ -55,7 +55,11 @@ const loginPost = async () => {
                     password
                 });
 
-                window.location.href = '/';
+                if (username === 'admin') {
+                    window.location.href = '/admin';
+                } else {
+                    window.location.href = '/';
+                }
             } catch (error) {
                 showAlert('Hibás felhasználónév vagy jelszó!');
             }

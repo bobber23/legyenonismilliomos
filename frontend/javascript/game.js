@@ -185,23 +185,25 @@ const checkValasz = async (valaszid) => {
         if (isCorrect.isCorrect === true) {
             button.classList.remove('selected');
             button.classList.add('correct');
-            setTimeout(() => {
-                level++;
-                kerdes();
-                levelszinezes();
-              let helps = document.querySelectorAll('.helpBtn');
-            for (const help of helps) {
-                if (help.classList.contains('usedHelp')) {
-                    help.classList.add('disabledHelp');
-                } else {
-                    help.classList.remove('disabledHelp');
-                }
+            if (level === 15) {
+                showAlert('Gratulálunk! Megnyerted a fődíjat! Nyereményed: 40 000 000 Ft');
+            } else {
+                showAlertContinue('Helyes válasz! Válasszon az alábbiak közül:');
             }
-            }, 4000);
         } else {
             button.classList.remove('selected');
             button.classList.add('incorrect');
             level = 1;
+            showAlert('Rossz válasz! A játéknak vége!');
+            setTimeout(() => {
+                kerdes();
+                levelszinezes();
+                let helps = document.querySelectorAll('.helpBtn');
+                for (const help of helps) {
+                    help.classList.remove('usedHelp');
+                    help.classList.remove('disabledHelp');
+                }
+            }, 4000);
         }
     } catch (error) {
         console.log(error);
@@ -255,6 +257,32 @@ function showAlert(message) {
     document.getElementById('alert').style.display = 'flex';
 }
 
+function showAlertContinue(message) {
+    document.getElementById('alertMessage').innerText = message;
+    document.getElementById('continueAlert').style.display = 'flex';
+}
+
 function closeAlert() {
     document.getElementById('alert').style.display = 'none';
+}
+
+function continueGame() {
+    level++;
+    kerdes();
+    levelszinezes();
+    let helps = document.querySelectorAll('.helpBtn');
+    for (const help of helps) {
+        if (help.classList.contains('usedHelp')) {
+            help.classList.add('disabledHelp');
+        } else {
+            help.classList.remove('disabledHelp');
+        }
+    }
+    document.getElementById('continueAlert').style.display = 'none';
+}
+
+function stopGame() {
+    const prizeAmounts = document.querySelectorAll('.prize-amount');
+    document.getElementById('continueAlert').style.display = 'none';
+    showAlert(`Gratulálunk! A nyereménye: ${prizeAmounts[15 - level].innerText}`);
 }

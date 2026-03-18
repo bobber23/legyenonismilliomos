@@ -522,9 +522,6 @@ a:hover {
     box-shadow: 0 4px 15px rgba(106, 158, 255, 0.25);
 }
 
-.usedHelp {
-}
-
 .disabledHelp {
     pointer-events: none;
     filter: grayscale(75%);

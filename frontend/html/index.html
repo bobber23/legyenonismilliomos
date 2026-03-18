@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hu">
     <head>
         <meta charset="UTF-8" />
@@ -23,16 +23,36 @@
                         <div id="valaszok" class="answers-grid"></div>
                     </div>
                     <div class="segitseg">
-                        <button id="phone" class="helpBtn" type="button" data-bs-toggle="modal" data-bs-target="#phoneModal" tabindex="-1"><img class="helpimage" src="../images/phone.png"></button>
-                        <button id="crowd" class="helpBtn" type="button" data-bs-toggle="modal" data-bs-target="#crowdModal" tabindex="-1"><img class="helpimage" src="../images/crowd.png"></button>
-                        <button id="half" class="helpBtn" type="button" tabindex="-1"><img class="helpimage" src="../images/5050.png"></button>
+                        <button
+                            id="phone"
+                            class="helpBtn"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#phoneModal"
+                            tabindex="-1"
+                        >
+                            <img class="helpimage" src="../images/phone.png" />
+                        </button>
+                        <button
+                            id="crowd"
+                            class="helpBtn"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#crowdModal"
+                            tabindex="-1"
+                        >
+                            <img class="helpimage" src="../images/crowd.png" />
+                        </button>
+                        <button id="half" class="helpBtn" type="button" tabindex="-1">
+                            <img class="helpimage" src="../images/5050.png" />
+                        </button>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-5 col-xl-5" id="right2">
                     <ol class="prize-list">
                         <li>
                             <span class="prize2-index">15</span
-                            ><span class="prize2-amount">40 000 000 Ft</span>
+                            ><span class="prize-amount prize2-amount">40 000 000 Ft</span>
                         </li>
                         <li>
                             <span class="prize-index">14</span
@@ -52,7 +72,7 @@
                         </li>
                         <li>
                             <span class="prize2-index">10</span
-                            ><span class="prize2-amount">1 500 000 Ft</span>
+                            ><span class="prize-amount prize2-amount">1 500 000 Ft</span>
                         </li>
                         <li>
                             <span class="prize-index">9</span
@@ -72,7 +92,7 @@
                         </li>
                         <li>
                             <span class="prize2-index">5</span
-                            ><span class="prize2-amount">100 000 Ft</span>
+                            ><span class="prize-amount prize2-amount">100 000 Ft</span>
                         </li>
                         <li>
                             <span class="prize-index">4</span
@@ -100,12 +120,17 @@
                 <button onclick="closeAlert()">OK</button>
             </div>
         </div>
-        <div id="phoneModal" class="modal" tabindex="-1"  data-bs-theme="dark">
+        <div id="phoneModal" class="modal" tabindex="-1" data-bs-theme="dark">
             <div class="modal-dialog customDialog">
                 <div class="modal-content helpContent">
                     <div class="modal-header customHeader">
                         <h1 class="modal-title">Telefonos segítség</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
                     </div>
                     <div class="modal-body">
                         <p id="phoneP">Itt a segítség</p>
@@ -113,20 +138,30 @@
                 </div>
             </div>
         </div>
-        <div id="crowdModal" class="modal" tabindex="-1"  data-bs-theme="dark">
+        <div id="crowdModal" class="modal" tabindex="-1" data-bs-theme="dark">
             <div class="modal-dialog customDialog">
                 <div class="modal-content helpContent">
                     <div class="modal-header customHeader">
                         <h1 class="modal-title">Közönség segítség</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
                     </div>
                     <div class="modal-body">
                         <div id="crowdAnswerDiv"></div>
-                        <div id="crowdPercentageDiv">
-
-                        </div>
+                        <div id="crowdPercentageDiv"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="continueAlert" class="alert">
+            <div class="alertBox">
+                <div id="alertMessage"></div>
+                <button onclick="stopGame()">Megállás</button>
+                <button onclick="continueGame()">Játék Folytatása</button>
             </div>
         </div>
     </body>
