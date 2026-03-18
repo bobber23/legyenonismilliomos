@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // loginCheck();
+    loginCheck();
     kerdes();
     levelszinezes();
     document.getElementById('half').addEventListener('click', felezo);
