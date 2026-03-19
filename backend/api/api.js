@@ -236,4 +236,10 @@ router.get('/answer/:id', async (request, response) => {
     }
 });
 
+router.get('/isAdmin', async (request, response) => {
+    const username = request.session.username;
+    response.status(200).json({
+        isAdmin: username == 'admin' ? true : false
+    });
+});
 module.exports = router;
