@@ -1,7 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
+    isAdmin();
     document.getElementById('addQuestionBtn').addEventListener('click', addQuestion);
     document.getElementById('difficultyInput').addEventListener('input', checkForValue);
 });
+
+async function isAdmin() {
+    const { isAdmin } = await Get('/api/isAdmin');
+    if (!isAdmin) {
+        window.location.href = '/login';
+    }
+}
 
 async function addQuestion() {
     let radioButtons = document.querySelectorAll('.correctRadio');
@@ -41,6 +49,18 @@ async function addQuestion() {
         } else {
             alert('Hiba a mezőkben');
         }
+    }
+}
+
+async function Get(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Státusz: (${response.status})\nMessage: (${response.statusText})`);
+        }
+        return await response.json();
+    } catch (error) {
+        throw new Error(error);
     }
 }
 
