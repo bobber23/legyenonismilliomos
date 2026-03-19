@@ -263,7 +263,8 @@ a:hover {
 .game-container {
     padding: 2rem 1rem;
     min-height: 100vh;
-    max-height: 100vh;
+    /* allow the page to grow taller than the viewport so the question/container can scroll into view */
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -281,7 +282,7 @@ a:hover {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    margin-right: max(3vw, 3vh);
+    margin-right: min(3vw, 3vh);
     flex: 1;
     min-width: 0;
 }
@@ -291,12 +292,13 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: min(3vw, 3vh);
     flex: 1;
     min-width: 0;
 }
 
 .question-container {
-    width: 80%;
+    width: 100%;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -378,7 +380,7 @@ a:hover {
     background: linear-gradient(135deg, #ffbe6a 0%, #ffdd1e 100%);
     border-color: #ffa723;
     box-shadow: 0 8px 30px rgba(255, 208, 0, 0.521);
-    animation: blink-animation 1s steps(1, start) infinite;
+    animation: blink-animation 1s infinite;
 }
 /* eszt majd ha a valasz asz helyes */
 .valasz-btn.correct {
@@ -437,9 +439,11 @@ a:hover {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .game-container {
         padding: 0.5rem;
+        align-items: flex-start;
+        justify-content: flex-start;
     }
 
     .question-container {
@@ -456,6 +460,26 @@ a:hover {
         padding: 0.9rem;
         font-size: 0.95rem;
     }
+
+    .answers-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .game-container .row {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    #left2,
+    #right2 {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    #right2 {
+        margin-top: 1rem;
+    }
 }
 
 .segitseg {
@@ -471,6 +495,7 @@ a:hover {
     display: flex;
     flex-direction: row;
     gap: clamp(0.5rem, 1.25vw, 0.875rem);
+    margin-top: 2vh;
 }
 
 .helpBtn {
@@ -482,10 +507,10 @@ a:hover {
     );
     border: 2px solid rgba(106, 158, 255, 0.4);
     border-radius: 12px;
-    padding: clamp(0.6rem, 1vw, 0.9rem);
+    padding: clamp(0.4rem, 1vw, 0.7rem);
     color: #ffffff;
     font-family: Oswald;
-    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    font-size: clamp(0.8rem, 1.8vw, 1.3rem);
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.25, 0.4, 0.6, 1);
     text-align: center;
@@ -597,5 +622,4 @@ a:hover {
     width: max(3vw, 3vh);
     height: max(3vw, 3vh);
     object-fit: contain;
-    border: rgb(0, 183, 255) 2px solid;
 }

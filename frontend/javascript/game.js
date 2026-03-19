@@ -19,6 +19,7 @@ const loginCheck = async () => {
 };
 
 let level = 1;
+let prizeAmount = '';
 let kerdesId;
 const kerdes = async () => {
     try {
@@ -188,14 +189,24 @@ const checkValasz = async (valaszid) => {
             if (level === 15) {
                 showAlert('Gratulálunk! Megnyerted a fődíjat! Nyereményed: 40 000 000 Ft');
             } else {
+                if (level % 5 == 0) {
+                    const prizeAmounts = document.querySelectorAll('.prize-amount');
+                    prizeAmount = prizeAmounts[15 - level].innerText;
+                }
+
                 showAlertContinue('Helyes válasz! Válasszon az alábbiak közül:');
             }
         } else {
             button.classList.remove('selected');
             button.classList.add('incorrect');
             level = 1;
-            showAlert('Rossz válasz! A játéknak vége!');
+
             setTimeout(() => {
+                if (prizeAmount != '') {
+                    showAlert(`Rossz válasz! A játéknak vége! Nyereményed: ${prizeAmount}`);
+                } else {
+                    showAlert(`Rossz válasz! A játéknak vége!`);
+                }
                 kerdes();
                 levelszinezes();
                 let helps = document.querySelectorAll('.helpBtn');
@@ -203,6 +214,7 @@ const checkValasz = async (valaszid) => {
                     help.classList.remove('usedHelp');
                     help.classList.remove('disabledHelp');
                 }
+                helpDialog = '';
             }, 4000);
         }
     } catch (error) {
@@ -285,4 +297,13 @@ function stopGame() {
     const prizeAmounts = document.querySelectorAll('.prize-amount');
     document.getElementById('continueAlert').style.display = 'none';
     showAlert(`Gratulálunk! A nyereménye: ${prizeAmounts[15 - level].innerText}`);
+    level = 1;
+    kerdes();
+    levelszinezes();
+    let helps = document.querySelectorAll('.helpBtn');
+    for (const help of helps) {
+        help.classList.remove('disabledHelp');
+        help.classList.remove('usedHelp');
+    }
+    helpDialog = '';
 }
